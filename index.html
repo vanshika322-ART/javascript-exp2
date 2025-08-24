@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Product Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            width: 300px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h2>Product List</h2>
+    <div class="container">
+        <label for="categoryFilter">Filter by Category:</label>
+        <select id="categoryFilter">
+            <option value="all">All</option>
+            <option value="clothing">Clothing</option>
+            <option value="electronics">Electronics</option>
+            <option value="books">Books</option>
+        </select>
+
+        <ul id="productList">
+            <li data-category="clothing">T-Shirt</li>
+            <li data-category="clothing">Jeans</li>
+            <li data-category="electronics">Headphones</li>
+            <li data-category="electronics">Smartphone</li>
+            <li data-category="books">Novel</li>
+            <li data-category="books">Cookbook</li>
+        </ul>
+    </div>
+
+    <script>
+        const categoryFilter = document.getElementById('categoryFilter');
+        const productList = document.getElementById('productList');
+        const products = productList.getElementsByTagName('li');
+
+        categoryFilter.addEventListener('change', function() {
+            const selectedCategory = this.value;
+            for (let product of products) {
+                if (selectedCategory === 'all' || product.dataset.category === selectedCategory) {
+                    product.style.display = '';
+                } else {
+                    product.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
